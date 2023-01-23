@@ -9,11 +9,13 @@ export class TransfromInterceptor implements NestInterceptor{
     const req = ctx.getRequest<Request>()
     const res = ctx.getResponse<Response>()
 
+    
     return next.handle().pipe(map(data=>({
       data,
       path:req.url,
       time:new Date().toISOString(),
-      success:"200"
+      success:true,
+      // status
     }))
     )
   }

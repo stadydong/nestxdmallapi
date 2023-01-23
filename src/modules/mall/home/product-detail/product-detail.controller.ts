@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { FindList } from '../../common.types'
+import { illegalId } from '../../common.utils'
 import { CreateProductDetail } from './product-detail.dto'
 import { ProductDetailService } from './product-detail.service'
 @ApiTags('product-detail')
@@ -19,6 +20,7 @@ export class ProductDetailController {
   @Get(':id')
   @ApiParam({description:"产品id",name:"id"})
   findOne(@Param("id") id) {
+    illegalId(id)
     return this.productDetailService.findOne(+id)
   }
 }

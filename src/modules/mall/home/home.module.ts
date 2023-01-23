@@ -15,8 +15,18 @@ import { ProductDetailService } from './product-detail/product-detail.service'
 import { ProductDetailController } from './product-detail/product-detail.controller'
 import { ProductEntities } from 'src/entities/mall/product.entities'
 import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities'
+import { CarController } from './car/car.controller';
+import { CarService } from './car/car.service';
+import { CarEntities } from 'src/entities/mall/car.entities'
+import { CarShoppinginfoEntitiess } from 'src/entities/mall/car-shopping-info.entities'
 
 @Module({
+  exports:[
+    TypeOrmModule,
+    CarService,
+    ProductService,
+    // GoodsService
+  ],
   imports: [
     TypeOrmModule.forFeature([
       NavEntities,
@@ -24,6 +34,8 @@ import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities
       PanelEntities,
       ProductEntities,
       ProductDetailEntities,
+      CarEntities,
+      CarShoppinginfoEntitiess
     ]),
   ],
   providers: [
@@ -32,6 +44,7 @@ import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities
     PanelService,
     ProductService,
     ProductDetailService,
+    CarService,
   ],
   controllers: [
     NavController,
@@ -39,6 +52,7 @@ import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities
     PanelController,
     ProductController,
     ProductDetailController,
+    CarController,
   ],
 })
 export class HomeModule {}

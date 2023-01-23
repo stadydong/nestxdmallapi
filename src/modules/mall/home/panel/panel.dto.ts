@@ -3,7 +3,7 @@ import { IsInt, IsString, Min } from 'class-validator'
 
 export class CreatePanelDto {
   @IsString()
-  @ApiProperty({ description: '名称' ,default:"小米10"})
+  @ApiProperty({ description: '名称', default: '小米10' })
   title: string
   @IsString()
   @ApiProperty({ description: '价格', default: '1.00' })
@@ -18,7 +18,7 @@ export class CreatePanelDto {
   })
   productImageUrl: string
   @IsInt()
-  @Min(0) 
+  @Min(0)
   @ApiProperty({ description: '产品ID' })
   productId: number
   @IsInt()

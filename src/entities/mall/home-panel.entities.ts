@@ -4,10 +4,13 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { BaseEntities } from '../base.entities'
 import { GoodsEntities } from './home-goods.entities'
+import { ProductDetailEntities } from './product-detail.entities'
+import { ProductEntities } from './product.entities'
 
 @Entity({ name: 'home_panel' })
 export class PanelEntities extends BaseEntities {
@@ -22,10 +25,15 @@ export class PanelEntities extends BaseEntities {
   //图片地址
   @Column({ type: 'varchar' })
   productImageUrl: string
-  @Column({ type: 'int' ,default:1})
-  productDetailId: number
+  /**
+   * 产品详情信息
+   */
+  // @Column({ type: 'int'})
+  @ManyToOne(()=>ProductEntities,product=>product.penel)
+  @JoinColumn()
+  productId: ProductEntities
   //价格
-  @Column({ type: "decimal", default: '1.00' ,precision:10,scale:2})
+  @Column({ type: 'decimal', default: '1.00', precision: 10, scale: 2 })
   price: number
   //排序号
   @Column({ name: 'order_num', type: 'int', default: '1' })

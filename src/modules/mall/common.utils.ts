@@ -1,3 +1,4 @@
+import { ApiException } from "../common/exception";
 import { FindList } from "./common.types";
 import { orderProductDto } from "./home/product/product.dto";
 /**
@@ -14,14 +15,8 @@ export function handler_paginnation(request:any,take:number = 40):void{
   }
 }
 
-// export class PriceRange(dto:orderProductDto,startPrice,endPrice){
-//   if(!(dto.priceOrderType=== 0 || dto.priceOrderType===1 || dto.priceOrderType===2)){
-//     dto.priceOrderType = 0
-//   }
-//   if(!dto.startPrice){ dto.startPrice = 0}
-//   if(!dto.endPrice){dto.endPrice = 9999999999}
-// }
-
-// 
-// 
-// 
+export function illegalId (id:string){
+  if(isNaN(parseInt(id))){
+    throw new ApiException(10008)
+  }
+}

@@ -9,7 +9,7 @@ import { CreateGoodsDto, UpdateCoodsDto } from './goods.dto';
 @Injectable()
 export class GoodsService {
   constructor(
-    @InjectRepository(GoodsEntities) private repositoryGoods:Repository<GoodsEntities>,
+    @InjectRepository(GoodsEntities) private goodsRepository:Repository<GoodsEntities>,
     private dataSource:DataSource
   ){}
   /**创建商品模块 */
@@ -25,17 +25,33 @@ export class GoodsService {
     return "service"
   }
   /**查找一条商品模块 */
-  findOne(id:number):Promise<GoodsEntities>{
-    return this.repositoryGoods.findOneBy({id})
+  async findOne(id:number):Promise<GoodsEntities>{
+    console.log("ssasa");
+    
+    console.log(id);
+    
+    // const goods = await this.repositoryGoods.findOne({where:{id}})
+    // const goods = await this.goodsRepository.findOne({where:{
+    //   id
+    // }})
+    const goods = await this.goodsRepository.findOne({where:{
+      id:1
+    }})
+    if (!goods) throw new ApiException(10000);
+    return goods
   }
   /** 查找所有模块*/
   find(){
-    return this.repositoryGoods.find({relations:{panel:true}})
+    return this.goodsRepository.find({relations:{panel:{
+      productId:{
+        productDetail:true
+      }
+    }}})
   }
   /**更新一个模块 */
   async update(id:number,dto:UpdateCoodsDto){
     const goods = await this.findOne(id)
     if(!goods) throw new ApiException(10001)
-    return this.repositoryGoods.update({id},dto)
+    return this.goodsRepository.update({id},dto)
   }
 }

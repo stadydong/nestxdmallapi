@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common'
-import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
+import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 
 import { handler_paginnation } from '../../common.utils'
 import { CreateProductDto, orderProductDto } from './product.dto'
@@ -23,5 +23,8 @@ export class ProductController {
     return this.productService.find(+query.skip,+query.take,+query.priceOrderType,+query.startPrice,+query.endPrice)
   }
   @Get(':id')
-  findOne() {}
+  @ApiParam({name:"id",description:"产品id"})
+  findOne(@Param("id") id) {
+    return this.productService.findOne(+id)
+  }
 }

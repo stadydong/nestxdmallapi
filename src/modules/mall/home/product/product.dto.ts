@@ -23,6 +23,7 @@ export class CreateProductDto {
   @ApiProperty({ description: '产品详情ID' })
   productDetailId: number
 }
+
 export class orderProductDto extends paginnation_params_dto{
   @IsOptional()
   @IsNumberString()
