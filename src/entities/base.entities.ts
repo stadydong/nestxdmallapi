@@ -1,4 +1,6 @@
-import { CreateDateColumn, Entity, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, UpdateDateColumn } from "typeorm";
+import { CarEntities } from "./mall/car.entities";
+import { ProductEntities } from "./mall/product.entities";
 
 @Entity()
 export class BaseEntities{

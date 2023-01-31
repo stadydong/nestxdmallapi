@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NavEntities } from 'src/entities/mall/nav.entities';
+import { ApiException } from 'src/modules/common/exception';
 import { Repository } from 'typeorm';
+import { CreateNavDto } from './nav.dto';
 
 @Injectable()
 export class NavService {
   constructor(
     @InjectRepository(NavEntities) private navRepository:Repository<NavEntities> 
   ){}
-  create(){
+  async create(dto:CreateNavDto){
     // this.navRepository.insert(
     // [
     //   {
@@ -32,7 +34,8 @@ export class NavService {
     //     toUrl:"www.baidu.com"
     //   },
     // ])
-    return "新增成功"
+    await this.navRepository.insert(dto)
+    return new ApiException(100000)
   }
   find(){
     return this.navRepository.find({order:{orderNum:"asc"}})

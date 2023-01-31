@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ApiException } from 'src/modules/common/exception';
+import { IdsDTO } from '../../common.dto';
 import { illegalId } from '../../common.utils';
-import { CreateCarDto, UpdateCarDto } from './car.dto';
+import { CreateCarDto, UpdateCarDto, UpdateCheckedDto } from './car.dto';
 import { CarService } from './car.service';
 
 @Controller('car')
@@ -28,14 +29,24 @@ export class CarController {
     return this.carService.findOne(+id)
   }
   @ApiOperation({summary:"在购物车更新一条的商品数据"})
-
+/**更新单个商品 */
   @Patch(":id")
   update(@Body() dto:UpdateCarDto,@Param("id") id){
-    return this.carService.update(+id,dto)
+    // if(dto.id){
+    //   return this.carService.updateChecked(dto)
+    // }
+    // return this.carService.update(+id,dto)
+    return dto
+  }
+  /**用来更新购物车选中状态 */
+  @Patch()
+  updateChecked(@Body() dto:UpdateCheckedDto){
+    return this.carService.updateChecked(dto)
+    // UpdateCheckedDto
   }
   @ApiOperation({summary:"在购物车删除一条的商品数据"})
   @Delete()
-  delete(@Body("id") id){
-    return this.carService.delete(+id)
+  delete(@Body("id") dto:IdsDTO){
+    return this.carService.deleteCarShopping(dto.ids)
   }
 }

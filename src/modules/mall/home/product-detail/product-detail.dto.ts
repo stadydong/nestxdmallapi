@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsArray, IsInt, IsString, Min } from 'class-validator'
+import { IsArray, IsInt, IsNumber, IsString, Min } from 'class-validator'
 
 export class CreateProductDetail {
   @ApiProperty({ description: '产品标题' ,default:"TCL新风空调1.5匹 新一级变频冷暖 60m³/h大新风量小蓝翼Ⅱ空调挂机KFRd-35GW/D-SWA11Bp(B1) 【一价全包版】"})
   @IsString()
   title: string
   @ApiProperty({ description: '产品出售价格',default:"3099.00"})
-  @IsString()
-  salePrice: string
+  @IsNumber()
+  salePrice: number
   @ApiProperty({ description: '产品数量',default:100})
   @IsInt()
   @Min(0)

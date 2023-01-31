@@ -12,23 +12,33 @@ export class ProductService {
     @InjectRepository(ProductEntities)
     private productRepository: Repository<ProductEntities>,
     private readonly ProductDetailService: ProductDetailService,
-    private readonly dataSource:DataSource
+    private readonly dataSource:DataSource,
   ) {}
   /**
    * 新增一个产品
    */
   async create(dto: CreateProductDto) {
-    const productDetail = await this.ProductDetailService.findOne(
-      dto.productDetailId,
-    )
+    const productDetail = await this.ProductDetailService.create({
+      title:dto.title,
+      salePrice:dto.price,
+      limitNum:dto.limitNum,
+      detailImg:dto.detailImg,
+      detailInfoImg:dto.detailInfoImg,
+      desc:dto.desc
+    })
+    console.log(productDetail);
+    // return "添加成功"
+    // const productDetail = await this.ProductDetailService.findOne(
+    //   dto.productDetailId,
+    // )
     const product = new ProductEntities()
     Object.assign(product,dto)
     product.productDetail = productDetail
     this.dataSource.transaction(async manager=>{
       await manager.save(product)
     })
-    console.log(dto)
-    return '新增成功'
+    // console.log(dto)
+    return new ApiException(100000)
   }
   /**
    * 查找所有产品
@@ -62,6 +72,14 @@ export class ProductService {
         where: {
           price: Between(startPrice, endPrice),
         },
+        relations:{
+          productDetail:true
+        },
+        select:{
+          productDetail:{
+            id:true
+          }
+        }
       })
       count = await this.productRepository.count({
         skip,
@@ -87,6 +105,14 @@ export class ProductService {
         where: {
           price: Between(startPrice, endPrice),
         },
+        relations:{
+          productDetail:true
+        },
+        select:{
+          productDetail:{
+            id:true
+          }
+        }
       })
       count = await this.productRepository.count({
         skip,
@@ -113,6 +139,14 @@ export class ProductService {
         where: {
           price: Between(startPrice, endPrice),
         },
+        relations:{
+          productDetail:true
+        },
+        select:{
+          productDetail:{
+            id:true
+          }
+        }
       })
       count = await this.productRepository.count({
         skip,

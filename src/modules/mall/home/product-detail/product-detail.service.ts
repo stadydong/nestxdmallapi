@@ -3,15 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities';
 import { ApiException } from 'src/modules/common/exception';
 import { Repository } from 'typeorm';
+import { CreateProductDetail } from './product-detail.dto';
 
 @Injectable()
 export class ProductDetailService {
   constructor(
     @InjectRepository(ProductDetailEntities) private productDetailRepository:Repository<ProductDetailEntities>
   ){}
-  async create(dto){
-    const result = await this.productDetailRepository.insert(dto)
-    return "添加成功"
+  async create(dto:CreateProductDetail){
+    
+    const result = await this.productDetailRepository.save(dto)
+    return result
   }
   find(){
     return this.productDetailRepository.find()

@@ -5,7 +5,7 @@ import { ProductEntities } from './product.entities'
 
 @Entity({ name: 'home_cart_shopping_info' })
 
-export class CarShoppinginfoEntitiess extends BaseEntities {
+export class CarShoppinginfoEntities extends BaseEntities {
   @PrimaryGeneratedColumn()
   id: number
   /**
@@ -22,4 +22,6 @@ export class CarShoppinginfoEntitiess extends BaseEntities {
 
   @ManyToOne(() => CarEntities, (car) => car.carshoppinginfo)
   car: CarEntities
+  @Column({type:"int",default:1})
+  checked:number
 }

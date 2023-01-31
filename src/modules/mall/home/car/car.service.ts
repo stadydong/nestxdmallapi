@@ -1,18 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CarShoppinginfoEntitiess } from 'src/entities/mall/car-shopping-info.entities';
+import { CarShoppinginfoEntities } from 'src/entities/mall/car-shopping-info.entities';
 import { CarEntities } from 'src/entities/mall/car.entities';
 import { DataSource, Repository } from 'typeorm';
 import { ApiException } from 'src/modules/common/exception'
-import { CreateCarDto, UpdateCarDto } from './car.dto';
+import { CreateCarDto, UpdateCarDto, UpdateCheckedDto } from './car.dto';
 import { ProductService } from '../product/product.service';
+import { IDList } from './types';
 
 @Injectable()
 export class CarService {
+
   constructor(
     // private readonly 
     @InjectRepository(CarEntities) private readonly carReposity:Repository<CarEntities>,
-    @InjectRepository(CarShoppinginfoEntitiess) private readonly carShoppingInfoReposity:Repository<CarShoppinginfoEntitiess>,
+    @InjectRepository(CarShoppinginfoEntities) private readonly carShoppingInfoReposity:Repository<CarShoppinginfoEntities>,
     private readonly productService:ProductService,
     private readonly dataSource:DataSource
   ){}
@@ -37,7 +39,7 @@ export class CarService {
     if(existProduct) throw new ApiException(10007)
 
     
-    let carShoppingInfo = new CarShoppinginfoEntitiess()
+    let carShoppingInfo = new CarShoppinginfoEntities()
     Object.assign(carShoppingInfo,dto)
 
     let product = await this.productService.findOne(dto.productId)
@@ -79,6 +81,7 @@ export class CarService {
     if(!shoppingInfo) throw new ApiException(10011)
     return shoppingInfo
   }
+  /**更新购物车当前商品的数量 */
   async update(id:number,dto:UpdateCarDto) {
     const shoppingInfo = await this.carShoppingInfoReposity.findOne({where:{
       id
@@ -96,7 +99,33 @@ export class CarService {
     await this.carShoppingInfoReposity.update({id,car:{id:dto.carId}},shoppingInfo)
     return new ApiException(100002)
   }
-  async delete(id:number) {
-    throw new Error('Method not implemented.');
+  /**更新购物车商品的选择状态 */
+  async updateChecked(dto: UpdateCheckedDto) {
+    // let idList:IDList[]  = []
+    // for (const id of dto.id) {
+    //   idList.push({id})
+    // }
+    // this.carShoppingInfoReposity.update(dto.id,)
+    // this.carShoppingInfoReposity.update()
+    let result = await this.carShoppingInfoReposity.createQueryBuilder().update().set({checked:dto.checked})
+    .orWhere("id IN( :...ids)",{ids:dto.id}).execute()
+
+    
+    return new ApiException(100002)
+  }
+  async deleteCarShopping(ids:number[]) {
+    if(ids.length===0) throw new ApiException(10013)
+    await this.carShoppingInfoReposity.delete(ids)
+    return new ApiException(100001);
+  }
+  async findCarShoppingInfo(carId:number,checkedWhere:0 | 1){
+    return await this.carReposity.findOne({relations:{
+      carshoppinginfo:{
+        product:true
+      },
+    },where:{id:carId,carshoppinginfo:{
+      checked:checkedWhere
+    }}})
+    
   }
 }

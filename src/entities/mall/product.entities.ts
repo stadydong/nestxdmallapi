@@ -7,9 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { BaseEntities } from '../base.entities'
-import { CarShoppinginfoEntitiess } from './car-shopping-info.entities'
+import { CarShoppinginfoEntities } from './car-shopping-info.entities'
 import { PanelEntities } from './home-panel.entities'
 import { ProductDetailEntities } from './product-detail.entities'
+import { UserOrderListItemEntities } from './user-orderListItem.entities'
 
 /**
  * 展示所有产品
@@ -36,13 +37,13 @@ export class ProductEntities extends BaseEntities {
   @JoinColumn()
   productDetail: ProductDetailEntities
   /**购物车的 */
-  @OneToOne(() => CarShoppinginfoEntitiess)
-  carShoppingInfo: CarShoppinginfoEntitiess
+  @OneToOne(() => CarShoppinginfoEntities)
+  carShoppingInfo: CarShoppinginfoEntities
 
   /** 首页商品 */
   @OneToMany(() => PanelEntities,(penel)=>penel.productId)
   penel: PanelEntities
-  /**
-   * 首页
-   */
+  /** 订单列表*/
+  @OneToMany(() => UserOrderListItemEntities,(orderListItem)=>orderListItem.product)
+  orderListItem: UserOrderListItemEntities[]
 }

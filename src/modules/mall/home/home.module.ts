@@ -18,7 +18,7 @@ import { ProductDetailEntities } from 'src/entities/mall/product-detail.entities
 import { CarController } from './car/car.controller';
 import { CarService } from './car/car.service';
 import { CarEntities } from 'src/entities/mall/car.entities'
-import { CarShoppinginfoEntitiess } from 'src/entities/mall/car-shopping-info.entities'
+import { CarShoppinginfoEntities } from 'src/entities/mall/car-shopping-info.entities'
 
 @Module({
   exports:[
@@ -35,7 +35,7 @@ import { CarShoppinginfoEntitiess } from 'src/entities/mall/car-shopping-info.en
       ProductEntities,
       ProductDetailEntities,
       CarEntities,
-      CarShoppinginfoEntitiess
+      CarShoppinginfoEntities
     ]),
   ],
   providers: [

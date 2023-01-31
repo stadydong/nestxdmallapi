@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntities } from "../base.entities";
 import { CarEntities } from "./car.entities";
+import { UserOrderListEntities } from "./user-orderList.entities";
 
 @Entity({name:"user"})
 export class UserEntities extends BaseEntities{
@@ -15,4 +16,7 @@ export class UserEntities extends BaseEntities{
   @OneToOne(()=>CarEntities)
   @JoinColumn()
   car:CarEntities
+
+  @OneToMany(()=>UserOrderListEntities,(orderList)=>orderList.user)
+  orderList:UserOrderListEntities[]
 }

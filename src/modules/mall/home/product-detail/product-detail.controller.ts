@@ -8,10 +8,11 @@ import { ProductDetailService } from './product-detail.service'
 @Controller('product-detail')
 export class ProductDetailController {
   constructor(private productDetailService: ProductDetailService) {}
-  @Post()
-  create(@Body() dto: CreateProductDetail) {
-    return this.productDetailService.create(dto)
-  }
+  /**只开放在添加产品的时候同时添加产品详情 */
+  // @Post()
+  // create(@Body() dto: CreateProductDetail) {
+  //   return this.productDetailService.create(dto)
+  // }
   @Get()
   find(@Query() query: FindList) {
     console.log(query)

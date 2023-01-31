@@ -53,4 +53,33 @@ export class UserService {
         throw new ApiException(10003)
       }
     }
+    /**查找用户全部属性 */
+    async findUserInfo(id:number){
+      const userInfo = await this.userReposity.findOne({where:{id}})
+      if(!userInfo){  throw new ApiException(10003)  }
+      return userInfo
+    }
+    /** 提供给orderList接口调用 */
+    async findUserOrderList(userId:number,skip:number,take:number){
+      const user = await this.userReposity.findAndCount({
+        skip,
+        take,
+        where:{
+        id:userId
+        },
+        relations:{
+          orderList:{
+            orderListItem:{
+              product:true
+            }
+          }
+        },
+        select:{
+          password:true
+        },
+      })
+      console.log(user);
+      
+      return user
+    }
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumberString, IsOptional } from "class-validator";
+import { IsArray, IsNumberString, IsOptional } from "class-validator";
 
 export class paginnation_params_dto{
   @ApiProperty({description:"跳过多少条数据",default:0,required:false})
@@ -10,4 +10,8 @@ export class paginnation_params_dto{
   @IsOptional()
   @IsNumberString()  //检测字符串是否为数字
   take:""
+}
+export class IdsDTO{
+  @IsArray()
+  ids:number[]
 }

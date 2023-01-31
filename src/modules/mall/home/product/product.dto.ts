@@ -18,10 +18,18 @@ export class CreateProductDto {
   @IsString()
   @ApiProperty({ description: '产品类型' })
   type:string
+
+  /**后续追加的 */
+  @ApiProperty({ description: '产品数量',default:100})
   @IsInt()
   @Min(0)
-  @ApiProperty({ description: '产品详情ID' })
-  productDetailId: number
+  limitNum: number
+  @ApiProperty({ description: '产品展示图片  以,作为间隔',default:"http://localhost:3000/product_swiper/swiper1-1.jpg,http://localhost:3000/product_swiper/swiper1-2.jpg,http://localhost:3000/product_swiper/swiper1-3.jpg,http://localhost:3000/product_swiper/swiper1-4.jpg"})
+  @IsString()
+  detailImg: string
+  @ApiProperty({ description: '产品详情介绍图片  以,作为间隔',default:"http://localhost:3000/product_img/product1-1.jpg"})
+  @IsString()
+  detailInfoImg: string
 }
 
 export class orderProductDto extends paginnation_params_dto{
