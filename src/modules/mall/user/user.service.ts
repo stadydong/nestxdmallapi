@@ -26,11 +26,12 @@ export class UserService {
     let users = new UserEntities()
     Object.assign(users,user)
     let car = new CarEntities()
-    users.car = car
-    car.user = users
+    
+    // car.user = users
     this.dateSouce.manager.transaction(async (manager)=>{
+      car = await manager.save(car)
+      users.car = car
       await manager.save(users)
-      await manager.save(car)
     })
     // await this.userReposity.insert(user)
     return new ApiException(100000)

@@ -15,7 +15,7 @@ export class PanelService {
     @InjectRepository(GoodsEntities)
     private goodsRepository: Repository<GoodsEntities>,
     @InjectRepository(PanelEntities)
-    // private repositoryPanel: Repository<PanelEntities>,
+    private repositoryPanel: Repository<PanelEntities>,
     private readonly goodsService: GoodsService,
     private readonly dataSource: DataSource,
     private readonly productService:ProductService
@@ -49,4 +49,5 @@ export class PanelService {
     });
     return new ApiException(100000);
   }
+
 }

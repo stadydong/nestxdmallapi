@@ -23,4 +23,5 @@ export class ProductDetailService {
     if(!productDetail) throw new ApiException(10010)
     return productDetail
   }
+
 }

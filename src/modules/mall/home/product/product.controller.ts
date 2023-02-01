@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common'
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 
 import { handler_paginnation } from '../../common.utils'
@@ -27,4 +27,5 @@ export class ProductController {
   findOne(@Param("id") id) {
     return this.productService.findOne(+id)
   }
+
 }

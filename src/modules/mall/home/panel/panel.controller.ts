@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Patch, Post } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { CreatePanelDto } from './panel.dto'
 import { PanelService } from './panel.service'
@@ -13,4 +13,9 @@ export class PanelController {
   create(@Body() dto: CreatePanelDto) {
     return this.panelService.create(dto)
   }
+  // @ApiOperation({ summary: '更新一个模块的内容' })
+  // @Patch()
+  // update(){
+  //   return this.panelService.update()
+  // }
 }

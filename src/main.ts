@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './global/exception.filter';
-import { TransfromInterceptor } from './global/transfrom.Interceptor';
+import { TransfromInterceptor } from './global/transfrom.interceptor';
 import * as express from 'express'
 import * as path from "path"
 import { SwaggerConfig } from './global/swagger.config';
