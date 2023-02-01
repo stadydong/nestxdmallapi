@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Query, Res, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Res, Session, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ApiException } from 'src/modules/common/exception';
@@ -24,6 +25,7 @@ export class PayController {
     await this.payService.wxPay(query,"已取消支付")
     throw new ApiException(110001)
   }
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({description:"获取支付二维码"})
   @Get("codeImg")
   GetcodeImg(@Query() dto:wxPayDto,@Session() session:any){

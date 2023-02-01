@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ApiException } from 'src/modules/common/exception';
 import { CreateUserDto} from './user.dto';
 import { UserService } from './user.service';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 @ApiTags("User")
 export class UserController {

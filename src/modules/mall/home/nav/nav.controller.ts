@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateNavDto } from './nav.dto';
 import { NavService } from './nav.service';
 
 @ApiTags("nav")
 @Controller('nav')
+@UseGuards(AuthGuard('jwt'))
 export class NavController {
   constructor(
     private navService:NavService

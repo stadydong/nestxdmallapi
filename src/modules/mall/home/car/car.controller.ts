@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ApiException } from 'src/modules/common/exception';
 import { IdsDTO } from '../../common.dto';
@@ -6,6 +7,7 @@ import { illegalId } from '../../common.utils';
 import { CreateCarDto, UpdateCarDto, UpdateCheckedDto } from './car.dto';
 import { CarService } from './car.service';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('car')
 @ApiTags("car")
 export class CarController {

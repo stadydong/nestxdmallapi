@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateGoodsDto, UpdateCoodsDto } from './goods.dto';
 import { GoodsService } from './goods.service';
 
 /**添加首页板块 */
+@UseGuards(AuthGuard('jwt'))
 @Controller('goods')
 @ApiTags("Goods")
 export class GoodsController {

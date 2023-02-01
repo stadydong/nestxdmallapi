@@ -1,8 +1,10 @@
-import { Body, Controller, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Patch, Post, UseGuards } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { CreatePanelDto } from './panel.dto'
 import { PanelService } from './panel.service'
 
+@UseGuards(AuthGuard('jwt'))
 //首页板块的内容
 @Controller('panel')
 @ApiTags('Panel')

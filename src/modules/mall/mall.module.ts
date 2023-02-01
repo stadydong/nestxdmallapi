@@ -5,8 +5,6 @@ import { UserModule } from './user/user.module';
 
 import { MallService } from './mall.service';
 import { LoginModule } from './login/login.module';
-import { PayController } from './service/pay/pay.controller';
-import { PayService } from './service/pay/pay.service';
 import { ServiceModule } from './service/service.module';
 
 

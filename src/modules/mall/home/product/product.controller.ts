@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 
 import { handler_paginnation } from '../../common.utils'
 import { CreateProductDto, orderProductDto } from './product.dto'
 import { ProductService } from './product.service'
 
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('product')
 @Controller('product')
 export class ProductController {

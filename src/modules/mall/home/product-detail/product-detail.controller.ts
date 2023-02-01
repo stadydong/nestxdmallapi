@@ -1,9 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger'
 import { FindList } from '../../common.types'
 import { illegalId } from '../../common.utils'
 import { CreateProductDetail } from './product-detail.dto'
 import { ProductDetailService } from './product-detail.service'
+
+@UseGuards(AuthGuard('jwt'))
 @ApiTags('product-detail')
 @Controller('product-detail')
 export class ProductDetailController {

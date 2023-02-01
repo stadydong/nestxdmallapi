@@ -9,11 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiHeader, ApiTags } from '@nestjs/swagger'
+import { ApiTags } from '@nestjs/swagger'
 import { Response } from 'express'
 import { ApiException } from 'src/modules/common/exception'
 import { AuthService } from '../auth/auth.service'
-import { JwtStrategy } from '../auth/jwt.strategy'
 
 import * as svgCaptcha from 'svg-captcha'
 import { LoginDto } from './login.dto'
@@ -28,8 +27,7 @@ export class LoginController {
     /**
      * 账号验证成功则生成token
      */
-    console.log(session)
-    console.log(user.code);
+
     /**
      * 判断验证码是否正确 如果正常判断账号密码
      */
