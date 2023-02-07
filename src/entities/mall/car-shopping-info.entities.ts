@@ -16,7 +16,7 @@ export class CarShoppinginfoEntities extends BaseEntities {
   /**
    * 商品的id
    */
-  @OneToOne(()=>ProductEntities)
+  @ManyToOne(()=>ProductEntities,(product)=>product.carShoppingInfo)
   @JoinColumn()
   product: ProductEntities
 

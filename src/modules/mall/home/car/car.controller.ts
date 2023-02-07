@@ -34,11 +34,9 @@ export class CarController {
 /**更新单个商品 */
   @Patch(":id")
   update(@Body() dto:UpdateCarDto,@Param("id") id){
-    // if(dto.id){
-    //   return this.carService.updateChecked(dto)
-    // }
-    // return this.carService.update(+id,dto)
-    return dto
+    illegalId(id)
+    return this.carService.update(+id,dto)
+
   }
   /**用来更新购物车选中状态 */
   @Patch()
@@ -46,9 +44,10 @@ export class CarController {
     return this.carService.updateChecked(dto)
     // UpdateCheckedDto
   }
-  @ApiOperation({summary:"在购物车删除一条的商品数据"})
+  @ApiOperation({summary:"在购物车删除一条或多条数据的商品数据"})
   @Delete()
-  delete(@Body("id") dto:IdsDTO){
+  delete(@Body() dto:IdsDTO){
+    
     return this.carService.deleteCarShopping(dto.ids)
   }
 }

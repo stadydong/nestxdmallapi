@@ -1,6 +1,5 @@
 import { ApiException } from "../common/exception";
-import { FindList } from "./common.types";
-import { orderProductDto } from "./home/product/product.dto";
+
 /**
  * 初始化分页的参数
  * @param request 
@@ -18,6 +17,6 @@ export function handler_paginnation(request:any,take:number = 40):void{
 
 export function illegalId (id:string){
   if(isNaN(parseInt(id))){
-    throw new ApiException(10008)
+    throw new ApiException(10008,404)
   }
 }

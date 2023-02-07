@@ -12,7 +12,7 @@ export class UserEntities extends BaseEntities{
   username:string
   @Column()
   password:string
-  @Column({type:"varchar",default:"http://localhost:3000/uimg/uimg1.png"})
+  @Column({type:"varchar",default:"http://43.139.82.106:3001/uimg/uimg1.png"})
   imgUrl:string
   /**虚拟名称用于展示聊天上的名称 */
   @Column({type:"varchar"})

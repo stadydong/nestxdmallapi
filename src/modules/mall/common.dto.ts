@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiBody, ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsNumberString, IsOptional } from "class-validator";
 
 export class paginnation_params_dto{
@@ -13,5 +13,5 @@ export class paginnation_params_dto{
 }
 export class IdsDTO{
   @IsArray()
-  ids:number[]
+  ids:Array<number>
 }

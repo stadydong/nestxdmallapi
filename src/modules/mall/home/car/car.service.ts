@@ -22,13 +22,16 @@ export class CarService {
    * 新增购物车数据
    */
   async create(dto:CreateCarDto){
-    let car = await this.carReposity.findOne({relations:{
-      carshoppinginfo:{
-        product:true
+    let car = await this.carReposity.findOne(
+    {
+      relations:{
+        carshoppinginfo:{
+          product:true
+        }
+      },
+      where:{
+        id:dto.carId
       }
-    },
-    where:{
-    }
     })
     if(!car) throw new ApiException(10006)
     console.log(car);
@@ -114,7 +117,7 @@ export class CarService {
     return new ApiException(100002)
   }
   async deleteCarShopping(ids:number[]) {
-    if(ids.length===0) throw new ApiException(10013)
+    if(ids.length===0) throw new ApiException(10013,404)
     await this.carShoppingInfoReposity.delete(ids)
     return new ApiException(100001);
   }
