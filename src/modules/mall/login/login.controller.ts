@@ -26,7 +26,7 @@ export class LoginController {
     const userInfo = await this.authService.validateUser(user)
     /**
      * 账号验证成功则生成token
-     */
+    */
 
     /**
      * 判断验证码是否正确 如果正常判断账号密码

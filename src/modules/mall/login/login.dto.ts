@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsString } from "class-validator";
-import { CreateUserDto } from "../user/user.dto";
+import { UserMainDto } from "../user/user.dto";
 
-export class LoginDto extends CreateUserDto{
+export class LoginDto extends UserMainDto{
   @IsString()
   @IsNotEmpty({message:"验证码不能为空"})
   @ApiProperty({description:"验证码"})

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { userInfo } from 'os';
 import { ApiException } from 'src/modules/common/exception';
+import { LoginDto } from '../login/login.dto';
 import { CreateUserDto } from '../user/user.dto';
 import { UserService } from '../user/user.service';
 
@@ -17,7 +18,7 @@ export class AuthService {
   /**
    * 验证用户登录的信息
    */
-  async validateUser(user:CreateUserDto){
+  async validateUser(user:CreateUserDto | LoginDto){
     // console.log(user);
     
     const userInfo = await this.userService.findUserName(user.username)
