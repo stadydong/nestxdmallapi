@@ -11,6 +11,7 @@ import { ValidationPipe } from '@nestjs/common';
  */
 import * as session from 'express-session';
 import { SessionOption } from './modules/mall/constant';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   /**配置swagger */
@@ -19,9 +20,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter())
   app.useGlobalInterceptors(new TransfromInterceptor())
-  /**  http://localhost:3000/swiper/swiper1.webp */
+  /** 组成公共资源的地方 http://localhost:3000/swiper/swiper1.webp */
   app.use(express.static(path.resolve(__dirname,"..","public")))
   console.log("http://localhost:3000");
+  /**注册WebSocket适配器 */
+  // app.useWebSocketAdapter(new WsAdapter(app))
   app.use(session({
     secret:SessionOption.secrect,
     rolling:true,

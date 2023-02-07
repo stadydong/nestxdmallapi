@@ -10,6 +10,10 @@ export class CreateUserDto{
   @IsNotEmpty({message:"密码不能为空"})
   @ApiProperty({description:"密码"})
   password:string
+  @IsString()
+  @IsNotEmpty({message:"名称不能为空"})
+  @ApiProperty({description:"虚拟名称"})
+  virtualName:string
 }
 // export class FindUIdDto{
 //   // @IsNumberString({},{message:"id为数字"})

@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MallModule } from './modules/mall/mall.module';
+import { WsModule } from './modules/ws/ws.module';
+import { UserChatModule } from './modules/userChat/userChat.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +19,8 @@ import { MallModule } from './modules/mall/mall.module';
     autoLoadEntities:true,  //自动加载实体
     retryDelay:500, //两次重试连接的间隔
     retryAttempts:5 //重试连接数据库的次数
-  }), MallModule],
+  }), MallModule, WsModule,UserChatModule],
+  
   controllers: [AppController],
   providers: [AppService],
 
